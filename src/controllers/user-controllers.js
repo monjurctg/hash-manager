@@ -40,7 +40,7 @@ userControllers.addUser = async (req, res, next) => {
 };
 
 // get all user
-userControllers.getALlUser = async (req, res) => {
+userControllers.getUsers = async (req, res) => {
   const filters = req.filters;
   const queries = req.queries;
   try {

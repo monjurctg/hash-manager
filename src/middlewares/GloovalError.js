@@ -1,4 +1,5 @@
 const sendErrorDev = (err, res) => {
+  console.log(err, "errr from error dev");
   res.status(err.statusCode).json({
     status: err.status,
     error: err,
@@ -32,11 +33,17 @@ module.exports = (err, req, res, next) => {
   console.log("Find an error".bgRed.white.bold);
 
   console.log(`${(err?.message, err)}`.red.bold);
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || "error";
-  if (process.env.NODE_ENV === "development") {
+
+  err.statusCode = err.statusCode ?? 500;
+  err.status = err.status ?? "error";
+  console.log("first");
+
+  if (process.env.NODE_ENV == "development") {
+    console.log("err dev");
     sendErrorDev(err, res);
   } else {
+    console.log("err dev else");
+
     sendErrorProd(err, res);
   }
 };

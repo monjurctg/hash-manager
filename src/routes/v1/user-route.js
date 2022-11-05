@@ -10,7 +10,7 @@ const router = express.Router();
 router
   .route("/users")
   .post(userControllers.addUser)
-  .get(checkAuth, useQueries, userControllers.getALlUser);
+  .get(checkAuth, useQueries, userControllers.getUsers);
 
 //   single useer
 router.post("/login", userControllers.login);

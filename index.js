@@ -14,7 +14,7 @@ dbConnect();
 
 const port = process.env.PORT ?? 5000;
 const server = app.listen(port, () => {
-  console.log(`server lissening from ${port}`.bgBlue.yellow);
+  console.log(`server listening from ${port}`.bgBlue.yellow);
 });
 
 // handle Globaly  the unhandle Rejection Error which is  outside the express

@@ -3,7 +3,7 @@ const {Schema} = mongoose;
 const validator = require("validator");
 const {ObjectId} = mongoose.Schema.Types;
 
-const userSchema = Schema(
+const clientsSchema = Schema(
   {
     name: {
       type: String,
@@ -23,26 +23,9 @@ const userSchema = Schema(
     email: {
       type: String,
       required: [true, "Please provide a email"],
-
       unique: [true, "email already exist"],
       validate: [validator.isEmail, "Please provide a valid email"],
     },
-    password: {
-      type: String,
-      required: true,
-    },
-    status: {
-      type: String,
-      enum: ["CEO", "CTO", "TeamLead", "DEV"],
-      default: "DEV",
-    },
-
-    todos: [
-      {
-        type: ObjectId,
-        ref: "todos",
-      },
-    ],
     projects: [
       {
         type: ObjectId,
@@ -53,6 +36,6 @@ const userSchema = Schema(
   {timestamps: true}
 );
 
-const User = mongoose.model("user", userSchema);
+const Clients = mongoose.model("clients", clientsSchema);
 
-module.exports = User;
+module.exports = Clients;
