@@ -8,7 +8,6 @@ const userSchema = Schema(
     name: {
       type: String,
       required: [true, "username is required"],
-
       trim: true,
     },
     imgURL: {
@@ -27,14 +26,25 @@ const userSchema = Schema(
       unique: [true, "email already exist"],
       validate: [validator.isEmail, "Please provide a valid email"],
     },
+    address: {
+      type: String,
+    },
     password: {
       type: String,
-      required: true,
+      required: [true, "Please provide a password"],
     },
     status: {
       type: String,
       enum: ["CEO", "CTO", "TeamLead", "DEV"],
-      default: "DEV",
+      default: "CEO",
+    },
+    added_by: {
+      type: ObjectId,
+      ref: "users",
+    },
+    Role_Priority: {
+      type: ObjectId,
+      ref: "priority",
     },
 
     todos: [
@@ -53,6 +63,6 @@ const userSchema = Schema(
   {timestamps: true}
 );
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("users", userSchema);
 
 module.exports = User;

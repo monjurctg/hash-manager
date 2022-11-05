@@ -4,7 +4,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 module.exports = function (req, res, next) {
   // get token
   const token = req.header("Authorization")?.split(" ")[1];
-  console.log(token);
+  // console.log(token);
   if (!token)
     return res.status(400).json({message: "Access Denied .Please Login"});
 

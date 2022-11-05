@@ -10,13 +10,25 @@ const userControllers = {};
 
 userControllers.addUser = async (req, res, next) => {
   // console.log(req.body);
+  let newUser;
   const {password} = req.body;
-
+  const id = req.params.id;
   const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = {
-    ...req.body,
-    password: hashedPassword,
-  };
+
+  if (id) {
+    newUser = {
+      ...req.body,
+      status: req.body.role,
+      added_by: id,
+      password: hashedPassword,
+    };
+  } else {
+    newUser = {
+      ...req.body,
+      password: hashedPassword,
+    };
+  }
+
   try {
     await userService.createUser(newUser);
 
@@ -57,24 +69,22 @@ userControllers.login = async (req, res) => {
   const user = await userService.singleUser(email);
 
   if (!user) {
-    return res
-      .status(500)
-      .json({status: "error", message: "inviled email or password"});
+    return res.status(500).json({
+      status: "error",
+      message: "inviled email or password",
+    });
   }
   if (await bcrypt.compare(password, user.password)) {
     user.password = "";
-    const token = jwt.sign(
-      {
-        user: user,
-      },
-      `${JWT_SECRET}`
-    );
+    const token = jwt.sign({user}, `${JWT_SECRET}`);
 
-    return res.status(200).json({status: "ok", token: token, user});
+    return res
+      .status(200)
+      .json({success: true, message: "Login successully", token});
   } else {
     return res
       .status(500)
-      .json({status: "error", error: "inviled username or password"});
+      .json({success: false, error: "inviled username or password"});
   }
 };
 

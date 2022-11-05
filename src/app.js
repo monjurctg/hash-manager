@@ -15,7 +15,7 @@ app.use(express.static("public"));
 
 // home routes
 app.get("/", (req, res) => {
-  console.log("hello");
+  // console.log("hello");
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 

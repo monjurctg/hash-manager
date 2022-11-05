@@ -14,7 +14,7 @@ module.exports = function (req, res, next) {
     const {page = 1, limit = 10} = req.query;
     const skip = (page - 1) * parseInt(limit);
     queries.limit = parseInt(limit);
-    console.log(skip, "skip");
+    // console.log(skip, "skip");
 
     queries.skip = skip;
   }
