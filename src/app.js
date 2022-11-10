@@ -10,7 +10,8 @@ const clientsRoute = require("./routes/v1/client-route");
 
 // global middile ware
 app.use(express.json());
-app.use(cors({origin: ["http://localhost:5000"]}));
+// app.use(cors({origin: ["http://localhost:3000"]}));
+app.use(cors());
 app.use(express.static("public"));
 
 // home routes
