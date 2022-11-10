@@ -27,4 +27,10 @@ priorityControllers.getPriority = async (req, res) => {
     .catch((err) => res.json({status: "error", error: err.message}));
 };
 
+priorityControllers.deleteOne = async (req, res, next) => {
+  const id = req.params.id;
+  priorityService.deletePriority(id);
+};
+priorityControllers.updateOne = async (req, res, next) => {};
+
 module.exports = priorityControllers;

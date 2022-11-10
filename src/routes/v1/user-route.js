@@ -33,5 +33,7 @@ router
   .post(priorityControllers.addPriority)
   .get(priorityControllers.getPriority);
 
+router.route("/priority/:id").get().delete().patch();
+
 // export router
 module.exports = router;
