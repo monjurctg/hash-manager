@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
 const User = require("../models/user-model");
+const sendEmail = require("../utils/mail-service");
+
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const userControllers = {};
@@ -11,7 +13,8 @@ const userControllers = {};
 userControllers.addUser = async (req, res, next) => {
   // console.log(req.body);
   let newUser;
-  const {password} = req.body;
+  const {password, email} = req.body;
+  const {role_id, ceo_id} = req.queries;
   const id = req.params.id;
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -22,6 +25,10 @@ userControllers.addUser = async (req, res, next) => {
       added_by: id,
       password: hashedPassword,
     };
+
+    subject: "message from team hash code";
+    body: `You are invited to join http://localhost:3000/users/signUp?${ceo_id}&&role_id ,Sign up with your email`;
+    sendEmail(email);
   } else {
     newUser = {
       ...req.body,

@@ -1,5 +1,6 @@
 const express = require("express");
 const priorityControllers = require("../../controllers/priority-controllers");
+const roleControllers = require("../../controllers/roleControllers");
 
 const userControllers = require("../../controllers/user-controllers");
 const checkAuth = require("../../middlewares/checkAuth");
@@ -17,7 +18,7 @@ router.post("/users/signup/:id", checkPermission, userControllers.addUser);
 router
   .route("/users")
 
-  .get(checkAuth, useQueries, userControllers.getUsers);
+  .get(useQueries, userControllers.getUsers);
 
 //   single useer
 router
@@ -33,7 +34,19 @@ router
   .post(priorityControllers.addPriority)
   .get(priorityControllers.getPriority);
 
-router.route("/priority/:id").get().delete().patch();
+router
+  .route("/priority/:id")
+  .get()
+  .delete(priorityControllers.deleteOne)
+  .patch();
+
+// role
+router
+  .route("/role")
+  .post(roleControllers.addrole)
+  .get(roleControllers.getRoles);
+
+router.route("/role/:id").delete(roleControllers.deleteOne).patch();
 
 // export router
 module.exports = router;

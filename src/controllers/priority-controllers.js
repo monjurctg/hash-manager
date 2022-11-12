@@ -12,7 +12,7 @@ priorityControllers.addPriority = async (req, res, next) => {
     .then(() => {
       res.status(200).json({
         status: "sucess",
-        message: "client add successfully",
+        message: "priority add successfully",
       });
     })
     .catch((err) => {
@@ -29,7 +29,14 @@ priorityControllers.getPriority = async (req, res) => {
 
 priorityControllers.deleteOne = async (req, res, next) => {
   const id = req.params.id;
-  priorityService.deletePriority(id);
+  priorityService
+    .deletePriority(id)
+    .then(() =>
+      res
+        .status(200)
+        .json({success: true, message: "priority delete successfully"})
+    )
+    .catch((err) => next(new Error(err)));
 };
 priorityControllers.updateOne = async (req, res, next) => {};
 

@@ -5,13 +5,9 @@ const {ObjectId} = mongoose.Schema.Types;
 
 const prioritySchema = Schema(
   {
-    name: {
-      type: String,
-      required: [true, "priority name is required"],
-      trim: true,
-    },
     value: {
       type: Number,
+      unique: true,
       required: [true, "priority value is required"],
     },
   },

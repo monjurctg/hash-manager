@@ -33,18 +33,13 @@ const userSchema = Schema(
       type: String,
       required: [true, "Please provide a password"],
     },
-    status: {
-      type: String,
-      enum: ["CEO", "CTO", "TeamLead", "DEV"],
-      default: "CEO",
+    Role: {
+      type: ObjectId,
+      ref: "roles",
     },
     added_by: {
       type: ObjectId,
       ref: "users",
-    },
-    Role_Priority: {
-      type: ObjectId,
-      ref: "priority",
     },
 
     todos: [
