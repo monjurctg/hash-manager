@@ -24,7 +24,7 @@ roleControllers.addrole = async (req, res, next) => {
 roleControllers.getRoles = async (req, res) => {
   roleService
     .getRole()
-    .then((result) => res.json({result}))
+    .then((data) => res.json({data}))
     .catch((err) => res.json({status: "error", error: err.message}));
 };
 

@@ -33,7 +33,7 @@ const userSchema = Schema(
       type: String,
       required: [true, "Please provide a password"],
     },
-    Role: {
+    role: {
       type: ObjectId,
       ref: "roles",
     },

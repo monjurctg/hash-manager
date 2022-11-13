@@ -14,7 +14,8 @@ userService.getUsers = (filters, queries) => {
     .select(queries?.fields)
     .sort(queries?.sortBy)
     .populate("added_by", "name -_id phone")
-    .populate("Role_Priority", "name value -_id");
+    .populate({path: "role", select: "name role_Priority"});
+  // .populate({path: "role", select: "value"});
 };
 userService.singleUser = (data) => {
   console.log(data, "_id");

@@ -11,30 +11,23 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const userControllers = {};
 
 userControllers.addUser = async (req, res, next) => {
-  // console.log(req.body);
-  let newUser;
-  const {password, email} = req.body;
-  const {role_id, ceo_id} = req.queries;
-  const id = req.params.id;
+  console.log(req.params, "params");
+  const {password, email, name} = req.body;
+  const {ceo_id, role_id} = req.params;
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  if (id) {
-    newUser = {
-      ...req.body,
-      status: req.body.role,
-      added_by: id,
-      password: hashedPassword,
-    };
+  let url = req.url.split("/")[2];
 
-    subject: "message from team hash code";
-    body: `You are invited to join http://localhost:3000/users/signUp?${ceo_id}&&role_id ,Sign up with your email`;
-    sendEmail(email);
-  } else {
-    newUser = {
-      ...req.body,
-      password: hashedPassword,
-    };
+  if (url === "invite") {
+    sendEmail(email, name, ceo_id, role_id);
   }
+  // if (url === "register") {
+  // } else {
+  // }
+  let newUser = {
+    ...req.body,
+    password: hashedPassword,
+  };
 
   try {
     await userService.createUser(newUser);

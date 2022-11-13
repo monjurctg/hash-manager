@@ -13,7 +13,8 @@ router.post("/login", userControllers.login);
 
 // all route of user
 router.post("/users/signup", userControllers.addUser);
-router.post("/users/signup/:id", checkPermission, userControllers.addUser);
+router.post("/users/invite/:ceo_id/:role_id", userControllers.addUser);
+router.post("/users/register", userControllers.addUser);
 
 router
   .route("/users")

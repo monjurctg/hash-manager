@@ -5,10 +5,8 @@ let roleService = {};
 roleService.creteRole = (role) => {
   return new Roles(role).save();
 };
-roleService.getRole = (filters, queries) => {
-  return Roles.find({})
-    .populate("role_Priority", "-_id value")
-    .select("_id name value ");
+roleService.getRole = () => {
+  return Roles.find({}).populate("role_Priority", "-_id value");
 };
 roleService.deleteRole = (id) => {
   return Roles.deleteOne({_id: id});
