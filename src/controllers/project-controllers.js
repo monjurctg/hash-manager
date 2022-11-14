@@ -21,7 +21,7 @@ projectControllers.addProject = async (req, res, next) => {
 projectControllers.getProjects = async (req, res) => {
   projectService
     .getProjects()
-    .then((result) => res.json({result}))
+    .then((result) => res.json({data: result}))
     .catch((err) => res.json({status: "error", error: err.message}));
 };
 

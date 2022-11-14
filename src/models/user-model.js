@@ -37,15 +37,16 @@ const userSchema = Schema(
       type: ObjectId,
       ref: "roles",
     },
+
     added_by: {
       type: ObjectId,
       ref: "users",
     },
 
-    todos: [
+    myTasks: [
       {
         type: ObjectId,
-        ref: "todos",
+        ref: "tasks",
       },
     ],
     projects: [

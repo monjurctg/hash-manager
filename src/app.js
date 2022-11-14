@@ -7,6 +7,7 @@ const GloovalError = require("./middlewares/GloovalError");
 const userRoute = require("./routes/v1/user-route");
 const projectRoute = require("./routes/v1/project-route");
 const clientsRoute = require("./routes/v1/client-route");
+const taskRoute = require("./routes/v1/task_routes");
 
 // global middile ware
 app.use(express.json());
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 app.use("/api", userRoute);
 app.use("/api/projects", projectRoute);
 app.use("/api/clients", clientsRoute);
+app.use("/api/tasks", taskRoute);
 
 // handling all (get,post,update,delete.....) unhandled routes
 app.all("*", (req, res, next) => {

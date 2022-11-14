@@ -14,13 +14,16 @@ userService.getUsers = (filters, queries) => {
     .select(queries?.fields)
     .sort(queries?.sortBy)
     .populate("added_by", "name -_id phone")
-    .populate({path: "role", select: "name role_Priority"});
+    .populate({path: "role", select: " role_Priority name"});
+
   // .populate({path: "role", select: "value"});
 };
-userService.singleUser = (data) => {
-  console.log(data, "_id");
+userService.singleUser = (email) => {
+  return User.find({email: email});
+};
 
-  return User.findOne({data});
+userService.updateUserData = (filter, object_data) => {
+  return User.findByIdAndUpdate(filter, object_data);
 };
 
 module.exports = userService;

@@ -57,26 +57,31 @@ userControllers.getUsers = async (req, res) => {
   const queries = req.queries;
   try {
     const result = await userService.getUsers(filters, queries);
+
     res.status(200).json({data: result});
   } catch (err) {
     throw Error(err);
   }
 };
 
+userControllers.updateUSerData = (req, res, next) => {};
+
 userControllers.login = async (req, res) => {
   const {email, password} = req.body;
   // console.log(username)
   const user = await userService.singleUser(email);
+  console.log(user, "user");
 
-  if (!user) {
+  if (!user[0]) {
     return res.status(500).json({
       status: "error",
       message: "inviled email or password",
     });
   }
-  if (await bcrypt.compare(password, user.password)) {
-    user.password = "";
-    const token = jwt.sign({user}, `${JWT_SECRET}`);
+  if (await bcrypt.compare(password, user[0].password)) {
+    user[0].password = "";
+
+    const token = jwt.sign({user: user[0]}, `${JWT_SECRET}`);
 
     return res
       .status(200)

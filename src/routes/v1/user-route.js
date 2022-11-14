@@ -16,10 +16,7 @@ router.post("/users/signup", userControllers.addUser);
 router.post("/users/invite/:ceo_id/:role_id", userControllers.addUser);
 router.post("/users/register", userControllers.addUser);
 
-router
-  .route("/users")
-
-  .get(useQueries, userControllers.getUsers);
+router.route("/users").get(useQueries, userControllers.getUsers);
 
 //   single useer
 router
