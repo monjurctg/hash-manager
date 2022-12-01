@@ -1,8 +1,10 @@
 const {default: mongoose} = require("mongoose");
 
+console.log("HASH_DB_USERNAME", process.env.HASH_DB_USERNAME);
 const dbConnect = () => {
+  let uri = `mongodb+srv://${process.env.HASH_DB_USERNAME}:${process.env.HASH_DB_PASSWORD}@cluster0.ottxxiw.mongodb.net/Hash-manager?retryWrites=true&w=majority`;
   mongoose
-    .connect(`${process.env.DB_CONNECTION}/Hash-manager`, {
+    .connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

@@ -29,6 +29,10 @@ const userSchema = Schema(
     address: {
       type: String,
     },
+    is_ceo: {
+      type: Boolean,
+      required: true,
+    },
     password: {
       type: String,
       required: [true, "Please provide a password"],

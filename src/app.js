@@ -12,7 +12,7 @@ const taskRoute = require("./routes/v1/task_routes");
 // global middile ware
 app.use(express.json());
 // app.use(cors({origin: ["http://localhost:3000"]}));
-app.use(cors());
+app.use(cors({origin: "*"}));
 app.use(express.static("public"));
 
 // home routes

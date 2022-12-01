@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const sendEmail = async (email, name, ceo_id, role_id) => {
+const sendEmail = async (email, name, ceo_id, role_id, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -28,6 +28,7 @@ const sendEmail = async (email, name, ceo_id, role_id) => {
     if (error) {
       console.log(error);
     } else {
+      res.status(200).json({message: "invite send successfully"});
       console.log("Email sent: " + info.response);
     }
   });

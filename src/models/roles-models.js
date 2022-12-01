@@ -12,6 +12,7 @@ const rolesSchema = Schema(
     },
     role_Priority: {
       type: ObjectId,
+      required: [true, "Role priority id  is required"],
       ref: "priority",
     },
   },

@@ -12,26 +12,28 @@ const userControllers = {};
 
 userControllers.addUser = async (req, res, next) => {
   console.log(req.params, "params");
-  const {password, email, name} = req.body;
-  const {ceo_id, role_id} = req.params;
+  const {password} = req.body;
+
   const hashedPassword = await bcrypt.hash(password, 10);
-
+  let newUser;
   let url = req.url.split("/")[2];
+  if (url === "register") {
+    newUser = {
+      ...req.body,
+      password: hashedPassword,
+    };
+  } else {
+    console.log("signup");
 
-  if (url === "invite") {
-    sendEmail(email, name, ceo_id, role_id);
+    newUser = {
+      ...req.body,
+      is_ceo: true,
+      password: hashedPassword,
+    };
   }
-  // if (url === "register") {
-  // } else {
-  // }
-  let newUser = {
-    ...req.body,
-    password: hashedPassword,
-  };
 
   try {
     await userService.createUser(newUser);
-
     res.status(200).json({
       status: "sucess",
       message: "user add successfully",
